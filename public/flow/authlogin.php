@@ -5,7 +5,7 @@ session_start();
 
 $result = pg_query_params(
   $dbconn,   
-  "SELECT email, senha_hash FROM usuarios WHERE email = $1", 
+  "SELECT id_usuario, nome, email, senha_hash FROM usuarios WHERE email = $1", 
   [$_POST['email']]
 );
 
@@ -17,8 +17,9 @@ if(!empty($usuario))
   //Salvando informações nas variáveis da sessão 
   if(password_verify($_POST["senha"], $usuario['senha_hash']))
   {
-    $_SESSION['usuario_nome'] = $_POST["nome"];
-    $_SESSION['usuario_email'] = $_POST['email'];
+    $_SESSION['usuario_id'] = $usuario['id_usuario'];
+    $_SESSION['usuario_nome'] = $usuario['nome'];
+    $_SESSION['usuario_email'] = $usuario['email'];
     $_SESSION['logado'] = true;
     header('Location: ../index.php');
     exit;
