@@ -5,12 +5,24 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
-  $nome = $_POST['nome'];
-  $email = $_POST['email'];
+  // Validar se os campos foram enviados
+  if(!isset($_POST['nome']) || !isset($_POST['email']) || !isset($_POST['senha']) || !isset($_POST['confirmar_senha'])) {
+    $_SESSION['erro'] = "Todos os campos são obrigatórios!";
+    header("Location: ../cadastro.php", true, 302);
+    exit;
+  }
+  
+  $nome = trim($_POST['nome']);
+  $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
   $senha = $_POST['senha'];
   $confirmar_senha = $_POST['confirmar_senha'];
   
   $msg = "";
+  
+  // Validar formato do email
+  if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $msg = "Email inválido! <br>";
+  }
   
   //Verificação se existe email no BD
   $result = pg_query_params(

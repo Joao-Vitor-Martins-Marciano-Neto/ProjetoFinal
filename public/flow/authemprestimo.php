@@ -11,8 +11,21 @@ if(!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $id_livro = $_POST['id_livro'];
+  // Validar se o campo foi enviado
+  if(!isset($_POST['id_livro']) || !isset($_SESSION['usuario_id'])) {
+    $_SESSION['erro'] = "Dados inválidos para realizar o empréstimo!";
+    header('Location: ../emprestimos.php');
+    exit;
+  }
+  
+  $id_livro = filter_var($_POST['id_livro'], FILTER_VALIDATE_INT);
   $id_usuario = $_SESSION['usuario_id'];
+  
+  if($id_livro === false) {
+    $_SESSION['erro'] = "ID do livro inválido!";
+    header('Location: ../emprestimos.php');
+    exit;
+  }
   
   // Verificar disponibilidade do livro (estoque > 0)
   $result = pg_query_params(
