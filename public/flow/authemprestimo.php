@@ -88,7 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   } catch(Exception $e) {
     // Reverter transação em caso de erro
     pg_query($dbconn, "ROLLBACK");
-    $_SESSION['erro'] = "Erro ao realizar empréstimo: " . $e->getMessage();
+    
+    // Registrar erro para debugging (em produção, usar um sistema de logs adequado)
+    error_log("Erro ao realizar empréstimo: " . $e->getMessage());
+    
+    // Mensagem genérica para o usuário
+    $_SESSION['erro'] = "Erro ao realizar empréstimo. Por favor, tente novamente mais tarde.";
     header('Location: ../emprestimos.php');
     exit;
   }

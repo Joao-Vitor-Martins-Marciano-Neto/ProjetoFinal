@@ -71,22 +71,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     //Inserir dados no BD
     $result = pg_query_params($dbconn, "INSERT INTO usuarios (nome, email, senha_hash) VALUES ($1, $2, $3)", [$nome, $email, $senha_hash]);
     
-    if($result) {
-      //Buscar o ID do usuário recém criado
-      $user_result = pg_query_params($dbconn, "SELECT id_usuario, nome, email FROM usuarios WHERE email = $1", [$email]);
-      $user = pg_fetch_assoc($user_result);
-      
-      if($user) {
-        $_SESSION['usuario_id'] = $user['id_usuario'];
-        $_SESSION['usuario_nome'] = $user['nome'];
-        $_SESSION['usuario_email'] = $user['email'];
-        $_SESSION['logado'] = true;
-      }
+    if(!$result) {
+      $_SESSION['erro'] = "Erro ao cadastrar usuário. Por favor, tente novamente.";
+      header("Location: ../cadastro.php", true, 302);
+      exit;
     }
     
-    //Redirecionamento para outra página 
-    header("Location: ../index.php");
-    exit;
+    //Buscar o ID do usuário recém criado
+    $user_result = pg_query_params($dbconn, "SELECT id_usuario, nome, email FROM usuarios WHERE email = $1", [$email]);
+    $user = pg_fetch_assoc($user_result);
+    
+    if($user) {
+      $_SESSION['usuario_id'] = $user['id_usuario'];
+      $_SESSION['usuario_nome'] = $user['nome'];
+      $_SESSION['usuario_email'] = $user['email'];
+      $_SESSION['logado'] = true;
+      
+      //Redirecionamento para outra página 
+      header("Location: ../index.php");
+      exit;
+    } else {
+      $_SESSION['erro'] = "Erro ao buscar dados do usuário.";
+      header("Location: ../login.php", true, 302);
+      exit;
+    }
   }
 }
 ?>
