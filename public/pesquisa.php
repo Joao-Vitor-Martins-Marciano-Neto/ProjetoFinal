@@ -36,29 +36,31 @@
             </form>
 
             <?php
-                if (isset($_GET["search"]) && 1 == 0) {
+                // Verifica se há uma pesquisa e exibe os resultados
+                if (isset($_GET["search"])) {
                     require "../class/books.php";
                     require "../class/book.php";
 
-                    $word = '%' . $_GET["search"] . '%';
+                    $search = trim($_GET['search']);
+                    if (strlen($search) < 2) {
+                        // Termo muito curto — não faz a consulta
+                        $result = false;
+                    } else {
+                        $word = '%' . $search . '%';
 
-                    // Aqui preciso usar STRING_AGG depois
-                    $result = pg_query_params($dbconn, 'SELECT * FROM books where title ILIKE $1', [$word]);
+                        // Consulta simples por título e descrição (case-insensitive)
+                        $sql = 'SELECT * FROM books WHERE title ILIKE $1 OR description ILIKE $1 ORDER BY title';
+                        $result = pg_query_params($dbconn, $sql, [$word]);
+
+                    }
 
                     $books = new Books($result);
                     $books->show_all_result();
                 }
 
-                // Criando livros de exemplo para testar
-                require "../class/book.php";
-                
-                $book1 = new Book(2, "Harry Potter", "42084-424", "Autor I", "Livro para testes I;", TRUE, "HARRY_POTTER.png");
-                
-                $book1->show();
 
-                $book2 = new Book(2, "Cristalografia: Cristais e estruturas cristalinas", "420131-322", "Autor II, Autor III", "Livro para testes;", FALSE, "CRISTALOGRAFIA.png");
                 
-                $book2->show();
+                
             ?>
 
 

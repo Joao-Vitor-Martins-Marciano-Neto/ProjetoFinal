@@ -35,7 +35,7 @@
                 }
                 echo "<div class='book-disponible-div $extra_class'>";
                     if (isset($opt)) {
-                        echo "<form method='GET' action='flow/emprestimo.php' class='book-loan'>";
+                        echo "<form method='GET' action='flow/authemprestimo.php' class='book-loan'>";
                             echo "<input type='text' name='emprestimo' value='" . $this->isbn . "' hidden>";
                             echo "<button type='submit'>Empréstimo</button>";
                         echo "</form>";
