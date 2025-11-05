@@ -1,6 +1,4 @@
-Apresentação dia 19/11
-Tabelas: usuário, livro, empréstimo 
-Usuário:
+
 CREATE TABLE Usuario (
    CREATE TABLE Usuario (
     id_usuario SERIAL PRIMARY KEY,
@@ -11,7 +9,6 @@ CREATE TABLE Usuario (
     tipo_usuario VARCHAR(50) NOT NULL -- 'Cliente' ou 'Admin'
 );
 
-Livro:
 CREATE TABLE Livro (
     id_livro SERIAL PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
