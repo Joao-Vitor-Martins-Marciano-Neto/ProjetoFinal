@@ -5,7 +5,7 @@ require_once __DIR__ . '../../config/db.php';
 
 $result = pg_query_params(
   $dbconn,   
-  "SELECT email, senha FROM usuarios WHERE email = $1", 
+  "SELECT email, senha_hash FROM usuario WHERE email = $1", 
   [$_POST['email']]
 );
 

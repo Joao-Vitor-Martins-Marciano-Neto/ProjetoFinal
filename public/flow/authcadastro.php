@@ -45,9 +45,9 @@ if(isset($msg))
 } else
 //Inserir dados no BD
  {
-  $result = pg_query_params($dbconn,"INSERT INTO usuarios (nome, email , senha_hash ) VALUES ($1, $2, $3)",[ $nome , $email ,$senha]);
+  $result = pg_query_params($dbconn,"INSERT INTO usuario (nome, email , senha_hash ) VALUES ($1, $2, $3)",[ $nome , $email ,$senha]);
 }
 //Redirecionamento para outra página 
-header("Location: ../index.php");
+header("Location: ../index.php",true,302);
 
 ?>

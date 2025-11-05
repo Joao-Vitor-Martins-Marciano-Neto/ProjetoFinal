@@ -28,5 +28,7 @@ if(isset($_SESSION['logado']))
      echo "Livro indisponível";
   }
 
-} 
+} else {
+  header('Location: ../login.php');
+}
 ?>
