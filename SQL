@@ -17,9 +17,7 @@ CREATE TABLE Livro (
     titulo VARCHAR(255) NOT NULL,
     autor VARCHAR(150) NOT NULL,
     isbn VARCHAR(20) NOT NULL UNIQUE,
-    ano_publicacao INT,
-    preco DECIMAL(10, 2) NOT NULL,
-    estoque INT NOT NULL
+    ano_publicacao INT
 );
 
 CREATE TABLE Emprestimo (
