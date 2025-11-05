@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: gainsboro;
+}
+
+:root {
+    --arial-default-font: Arial, Helvetica, sans-serif;
+}
+
+
+/* CSS - Cabeçalho */
+
+header {
+    display: flex;
+    margin-top: auto;
+    align-items: center;
+    background-color: rgb(16, 118, 118);
+}
+
+#header-info a{
+    display: flex; /* Coloca a imagem da logo ao lado do titulo  */
+    align-items: center; /* Centraliza a imagem e a logo */
+    text-decoration: none; /* Remover estilo de link */
+    color: black;
+}
+
+a h1 {
+    font-family: var(--arial-default-font);
+    font-size: clamp(18px, 30px, 35px);
+    padding-left: 7px;
+}
+
+#header-logo {
+    width: clamp(50px, 12%, 70px); /* Diminuir tamanho da imagem */
+}
+
+#header-links #links{
+    display: flex; /* Colocar links em uma linha só */
+}
+
+#links .link {
+    padding-right: 10px;
+    list-style: none;
+}
+
+.link a {
+    text-decoration: none;
+    color: black;
+    font-size: clamp(12px, 115%, 18px);
+    font-weight: bold;
+    font-family: var(--arial-default-font)
+}
+
+.link.white a{
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 2px 5px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+@keyframes mouse-in-link {
+    0% {
+        border: 2px solid rgb(255, 255, 255);
+    }
+
+    25% {
+        border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        border: 1px solid rgba(255, 255, 255, 0.3)
+    }
+
+    100% {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+.link a:hover {
+    animation: mouse-in-link 0.5s ease-in-out forwards;
+}
+
+
+
+/*  ADAPTADO A CELULAR    */
+
+@media (max-width: 350px) {
+    a h1 {
+        font-size: 0px;
+    }
+}
+
+@media (max-width: 400px) {
+    a h1 {
+        font-size: 13px;
+    }
+    .link {
+        font-size: 10px;
+    }
+
+    .link .white a {
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 500px) {
+    a h1 {
+        font-size: 18px;
+    }
+    .link {
+        font-size: 10px;
+    }
+
+    .link .white a {
+        margin-left: 0px;
+    }
+}
+
+
+/* CSS - PESQUISA */
+
+#book-search { /* Formulário */
+    height: 10vh;
+    width: 100%;
+    margin-top: clamp(10px, 40px, 40px);
+}
+
+#search-area { /* Formulário div */
+    display: flex;
+    align-items: center;
+    font-family: var(--arial-default-font);
+    justify-content: center;
+}
+
+label input { /* Input de texto dentro do form */
+    border-radius: 12px;
+    border: 1px solid gainsboro;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: clamp(15px, 16px, 16px);
+    padding: 7px;
+}
+
+label input::placeholder {
+    font-family: var(--arial-default-font);
+}
+
+#search-area button { /* Botão submit */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgb(191, 191, 191);
+    margin-left: 3px;
+}
+
+#search-area button img { /* Imagem do botão */
+    width: 80%;
+    margin: 4px;
+}
