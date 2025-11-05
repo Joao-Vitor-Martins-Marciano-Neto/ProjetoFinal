@@ -13,18 +13,17 @@ if(isset($_SESSION['logado']))
   // Verificar disponibilidade
   $resultado=pg_query_params(
         $dbconn,
-        "SELECT disponibilidade FROM livros as l WHERE l.isbn = $1",
+        "SELECT FROM emprestimo as E WHERE E.isbn = $1",
         [$isbn]
   );
 
-  if($resultado[0]['disponibilidade'] == TRUE) 
+  if(empty(pg_fetch_all($resultado))) 
   {
     // Alterar disponibilidade
-    pg_exec($dbconn,"ALTER TABLE livros as l SET disponibilidade=FALSE WHERE l.isbn = $1",
-    [$isbn]);
+    //Adicionar livro na tabela de empréstimo com base no código SQL
+    pg_exec($dbconn,"INSERT INTO emprestimo (id_usuario, isbn, data_emprestimo, data_prevista_devolucao) VALUES ($1, $2, CURRENT_DATE, CURRENT_DATE + INTERVAL '7 days')",
+    [$_SESSION['usuario_id'], $isbn]);
  
-    //Código abaixo deve ser corrigido
-    pg_exec($dbconn,"ALTER TABLE emprestimo as e SET id_usuario=$1 WHERE e.isbn=$2", []);
   } else {
      echo "Livro indisponível";
   }

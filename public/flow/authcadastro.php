@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 //Verificação se existe email no BD
 $result = pg_query_params(
   $dbconn, 
-  "SELECT nome FROM usuarios WHERE email = $1", 
+  "SELECT email FROM usuario WHERE email = $1", 
   [$_POST['email']]
 );
 $dados = pg_fetch_all($result);

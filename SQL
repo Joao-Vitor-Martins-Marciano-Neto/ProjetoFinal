@@ -16,7 +16,7 @@ CREATE TABLE Livro (
     ano_publicacao INT
 );
 
-CREATE TABLE Emprestimo (
+CREATE TABLE emprestimo (
     id_emprestimo SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_livro INT NOT NULL,
