@@ -19,7 +19,7 @@ CREATE TABLE livro (
 CREATE TABLE emprestimo (
     id_emprestimo SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL,
-    id_livro INT NOT NULL,
+    isbn INT NOT NULL,
     data_emprestimo DATE NOT NULL,
     data_prevista_devolucao DATE NOT NULL,
     data_devolucao_real DATE NULL,
