@@ -28,8 +28,6 @@ if (strlen(($nome)) < 3) {
 //Verificação dos campos de senha
 if ($senha !== $confirmar_senha) {
   $msg = $msg . "As senhas não coincidem! <br>";
-} else {
-  $senha = password_hash($senha, PASSWORD_DEFAULT);
 }
 //Exigência para no mínimo 6 caracteres na senha e um número (segurança)
 if (strlen($senha) < 6) {
@@ -45,7 +43,8 @@ if(isset($msg))
 } else
 //Inserir dados no BD
  {
-  $result = pg_query_params($dbconn,"INSERT INTO usuario (nome, email , senha_hash ) VALUES ($1, $2, $3)",[ $nome , $email ,$senha]);
+  $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+  $result = pg_query_params($dbconn,"INSERT INTO usuario (nome, email , senha_hash, data_cadastro, tipo_usuario ) VALUES ($1, $2, $3, CURRENT_DATE, 'Cliente')",[ $nome , $email ,$senha_hash]);
 }
 //Redirecionamento para outra página 
 header("Location: ../index.php",true,302);

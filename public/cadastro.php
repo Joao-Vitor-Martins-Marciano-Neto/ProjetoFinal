@@ -22,6 +22,9 @@
                     <label for="senha">Senha:</label>
                     <input type="password" id="senha" name="senha" required><br><br>
 
+                    <label for="confirmar_senha">Confirmar Senha:</label>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" required><br><br>
+
                     <input type="submit" value="Cadastrar">
                 </form>
             </main>
