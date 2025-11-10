@@ -17,13 +17,14 @@
 
                 // Primeiro, remover empréstimos expirados (mais de 7 dias) da base de dados
                 // Isso garante que livros com empréstimos expirados fiquem disponíveis para outros usuários
+                // A devolução automática ocorre após 7 dias, removendo o registro do banco
                 $delete_expired = pg_query_params(
                     $dbconn,
                     "DELETE FROM emprestimo WHERE data_emprestimo < CURRENT_DATE - INTERVAL '7 days'",
                     []
                 );
 
-                // Buscar empréstimos do usuário logado
+                // Buscar empréstimos do usuário logado (que ainda não foram devolvidos automaticamente)
                 $result = pg_query_params(
                     $dbconn,
                     "SELECT e.id_emprestimo, e.data_emprestimo, e.data_prevista_devolucao, 
@@ -51,12 +52,12 @@
                 <?php else: ?>
                     <div class="loans-list">
                         <?php foreach($emprestimos as $emprestimo): 
-                            // Calcular se o empréstimo expirou (mais de 7 dias)
+                            // Calcular quantos dias o livro está emprestado
                             $data_emprestimo = new DateTime($emprestimo['data_emprestimo']);
                             $hoje = new DateTime();
                             $dias_emprestado = $hoje->diff($data_emprestimo)->days;
-                            $expirado = $dias_emprestado >= 7;
-                            $status = $expirado ? 'Devolvido' : 'Ativo';
+                            // Se chegou ao 7º dia exato, mostrar como "Devolvido" antes de ser removido
+                            $status = ($dias_emprestado >= 7) ? 'Devolvido' : 'Ativo';
                         ?>
                             <div class="loan-item">
                                 <div class="loan-info">

@@ -39,17 +39,6 @@
 
                     <input type="submit" value="Cadastrar">
                 </form>
-                
-                <style>
-                    .error-message {
-                        background-color: #f8d7da;
-                        color: #721c24;
-                        padding: 12px;
-                        border: 1px solid #f5c6cb;
-                        border-radius: 4px;
-                        margin: 15px 0;
-                    }
-                </style>
             </main>
         </body>
 
