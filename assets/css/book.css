@@ -1,0 +1,114 @@
+main {
+    padding: 7px;
+}
+
+:root {
+    --default-border-radius: 8px;
+}
+
+.book {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    margin-top: 15px;
+    border: 2px solid gainsboro;
+    border-radius: var(--default-border-radius);
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.3);
+}
+
+.book:hover {
+    transform: translateY(-3px);
+}
+
+.book-principal {
+    display: flex;
+    font-family: var(--arial-default-font);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: var(--default-border-radius);
+    border-end-end-radius: 0px;
+    border-end-start-radius: 0px;
+}
+
+.book-img {
+    width: clamp(70px, 80px, 90px);
+    border: 2px solid black;
+    margin-bottom: 5px;
+    border-radius: var(--default-border-radius);
+}
+
+.book-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.book-desc {
+    padding-top: 10px;
+}
+
+.book-extra-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.book-isbn {
+    font-family: monospace, system-ui;
+    font-size: clamp(10px, 15px, 18px);
+}
+
+.book-authors {
+    padding-right: 10px;
+}
+
+.book-disponible-div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-end-end-radius: var(--default-border-radius);
+    border-end-start-radius: var(--default-border-radius);
+}
+
+.green {
+    background-color: rgb(0, 185, 0);
+}
+
+.red {
+    background-color: rgb(185, 0, 0);
+    padding: 10px;
+}
+
+.book-loan {
+    padding: 3px;
+    display: flex;
+}   
+
+.book-loan button{
+    padding: 10px 15px 10px 15px;
+    border-radius: var(--default-border-radius);
+    border: none;
+    transition: transform 0.3s ease-in-out;
+
+}
+
+.book-loan button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* ADAPTADO A CELULAR   */
+@media (max-width: 500px) {
+    .book-desc {
+        font-size: 14px;
+    }
+
+    .book-isbn {
+        font-size: 10px;
+    }
+
+    .book-authors {
+        font-size: 12px;
+    }
+}
