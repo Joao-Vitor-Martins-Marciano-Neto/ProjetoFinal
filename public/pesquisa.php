@@ -48,8 +48,8 @@
                     } else {
                         $word = '%' . $search . '%';
 
-                        // Consulta simples por título e descrição (case-insensitive)
-                        $sql = 'SELECT * FROM livro WHERE title ILIKE $1 OR description ILIKE $1 ORDER BY title';
+                        // Consulta simples por título e autor (case-insensitive)
+                        $sql = 'SELECT * FROM livro WHERE titulo ILIKE $1 OR autor ILIKE $1 ORDER BY titulo';
                         $result = pg_query_params($dbconn, $sql, [$word]);
 
                     }
