@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '../../config/db.php';
+require_once __DIR__ . '/../../config/db.php'; // Fixed: Added missing '/' for correct path concatenation
+
+session_start(); // Fixed: Added session_start() to enable $_SESSION usage
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
   {
@@ -39,7 +41,9 @@ if (!preg_match('/[0-9]/', $senha)) {
 //Emitir mensagens de erro
 if(isset($msg))
 {
+  $_SESSION['erro'] = $msg; // Fixed: Store error message in session for display on cadastro.php
   header("Location: ../cadastro.php",true,302);
+  exit; // Fixed: Added exit after header redirect
 } else
 //Inserir dados no BD
  {
@@ -48,5 +52,6 @@ if(isset($msg))
 }
 //Redirecionamento para outra página 
 header("Location: ../index.php",true,302);
+exit; // Fixed: Added exit after header redirect
 
 ?>

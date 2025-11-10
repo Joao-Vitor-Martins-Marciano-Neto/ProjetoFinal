@@ -1,6 +1,6 @@
 <?php
     require "./book.php";
-    require_once __DIR__ . '../config/db.php';
+    require_once __DIR__ . '/../config/db.php'; // Fixed: Added missing '/' for correct path concatenation
     class Books {
         public $list = [];
 
