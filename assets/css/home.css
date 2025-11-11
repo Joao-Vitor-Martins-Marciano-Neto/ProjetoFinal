@@ -1,0 +1,69 @@
+  /* CSS para a página inicial sem interferir com o public.css */
+
+/* HTML:
+<div class="main-content">
+                    <h1>Bem-vindo ao Sistema de Empréstimos de Livros</h1>
+                    <p>Este sistema permite que você gerencie empréstimos de livros de forma eficiente e
+                    prática. Você pode visualizar os livros disponíveis, solicitar empréstimos e acompanhar o
+                    status dos seus empréstimos.</p>
+                </div>
+
+                <!-- Lista de benefícios -->
+                <section class="benefits">
+                    <h2>Benefícios do Sistema:</h2>
+                    <ul>
+                        <li>Interface amigável e fácil de usar</li>
+                        <li>Gerenciamento eficiente de empréstimos</li>
+                        <li>Acompanhamento em tempo real do status dos empréstimos</li>
+                        <li>Notificações automáticas para devoluções</li>
+                    </ul>
+                </section> */
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    margin: 0;
+    padding: 0;
+}
+.main-content {
+    text-align: center;
+    padding: 50px;
+}
+
+/* Cor sugerida para o titulo que seja diferente da cor do cabeçalho e a fornecida atualmente*/
+.main-content h1 {
+    font-size: 36px;
+    color: rgb(70, 148, 148);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+.main-content p {
+    text-align: left;
+    font-size: 18px;
+    color: #004d40;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.benefits {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+.benefits h2 {
+    color: #00796b;
+}
+
+.benefits ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.benefits li {
+    margin: 10px 0;
+    color: #004d40;
+}

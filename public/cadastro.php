@@ -5,14 +5,26 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Cadastro</title>
+            <link rel="stylesheet" href="../assets/css/public.css">
+            <link rel="stylesheet" href="../assets/css/cadastro.css">
         </head>
 
         <body>
             <!-- Carrega a sessão, Mostra o cabeçalho e abre a tag main -->
-            <?php require "/view/header.php"; ?>
+            <?php require "../view/header.php"; ?>
 
                 <h1>Cadastro de Usuário</h1>
-                <form action="/flow/authcadastro.php" method="POST">
+                
+                <?php if(isset($_SESSION['erro'])): ?>
+                    <div class="error-message">
+                        <?php 
+                            echo $_SESSION['erro'];
+                            unset($_SESSION['erro']);
+                        ?>
+                    </div>
+                <?php endif; ?>
+                
+                <form action="flow/authcadastro.php" method="POST">
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" required><br><br>
 

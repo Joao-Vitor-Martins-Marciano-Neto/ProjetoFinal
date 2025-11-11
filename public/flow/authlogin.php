@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '../../config/db.php'; 
+require_once __DIR__ . '/../../config/db.php'; // Fixed: Added missing '/' for correct path concatenation 
 
  session_start();
 
@@ -38,4 +38,5 @@ if(!empty($usuario) )
 //Redirecionamento para outra página 
  $_SESSION['erro'] = "Email não cadastrado!";
  header('Location: ../login.php');
+ exit; // Fixed: Added missing exit after header redirect
 ?>

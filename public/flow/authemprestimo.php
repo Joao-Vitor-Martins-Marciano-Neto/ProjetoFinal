@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '../../config/db.php';
+require_once __DIR__ . '/../../config/db.php'; // Fixed: Added missing '/' for correct path concatenation
 
 //Login...verificar
 //Pegar ISBN
@@ -21,6 +21,20 @@ if(isset($_SESSION['logado']))
   
   if(!empty($livro)) 
   {
+    // Verificar quantos livros o usuário já tem emprestados
+    $resultado_count = pg_query_params(
+          $dbconn,
+          "SELECT COUNT(*) as total FROM emprestimo WHERE id_usuario = $1 AND (status_emprestimo = 'Ativo' OR status_emprestimo IS NULL OR status_emprestimo = '')",
+          [$_SESSION['usuario_id']]
+    );
+    $count_data = pg_fetch_assoc($resultado_count);
+    
+    if($count_data['total'] >= 3) {
+      echo "<script>alert('Você já possui 3 livros emprestados. Devolva um livro antes de pegar outro emprestado.');</script>";
+      echo "<script>window.location.href='../pesquisa.php';</script>";
+      exit;
+    }
+    
     // Verificar se já existe empréstimo ativo para este livro
     $resultado_emprestimo = pg_query_params(
           $dbconn,
@@ -52,5 +66,6 @@ if(isset($_SESSION['logado']))
 
 } else {
   header('Location: ../login.php');
+  exit; // Fixed: Added exit after header redirect
 }
 ?>
